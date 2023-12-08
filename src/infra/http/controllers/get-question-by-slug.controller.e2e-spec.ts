@@ -7,7 +7,7 @@ import request from 'supertest'
 import { QuestionFactory } from 'test/factories/make-question'
 import { StudentFactory } from 'test/factories/make-student'
 
-describe('Fetch recent questions (E2E)', () => {
+describe('Get question by slug (E2E)', () => {
   let app: INestApplication
   let studentFactory: StudentFactory
   let questionFactory: QuestionFactory
@@ -28,36 +28,29 @@ describe('Fetch recent questions (E2E)', () => {
     await app.init()
   })
 
-  test('[GET] /questions', async () => {
+  test('[GET] /questions/:slug', async () => {
     const user = await studentFactory.makePrismaStudent()
-
+    console.log(user)
     const accessToken = jwt.sign({ sub: user.id.toString() })
+    console.log(accessToken)
 
-    for (let i = 3; i > 0; i--) {
-      const a = await questionFactory.makePrismaQuestion({
-        authorId: user.id,
-        title: `Question title ${i}`,
-      })
-    }
+    const question = await questionFactory.makePrismaQuestion({
+      authorId: user.id,
+      title: 'Question title 1',
+    })
+
+    console.log(question)
 
     const response = await request(app.getHttpServer())
-      .get('/questions')
+      .get(`/questions/question-title-1`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      questions: [
-        expect.objectContaining({
-          title: 'Question title 1',
-        }),
-        expect.objectContaining({
-          title: 'Question title 2',
-        }),
-        expect.objectContaining({
-          title: 'Question title 3',
-        }),
-      ],
+      question: expect.objectContaining({
+        title: 'Question title 1',
+      }),
     })
   })
 })
