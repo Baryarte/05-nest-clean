@@ -28,7 +28,6 @@ describe('Get Question By Slug', () => {
     const result = await sut.execute({
       slug: 'any-title',
     })
-    console.log('INFERRNOOO')
 
     expect(result.isRight()).toBeTruthy()
     expect(result.value).toHaveProperty('question')

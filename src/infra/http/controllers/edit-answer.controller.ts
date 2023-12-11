@@ -1,0 +1,61 @@
+﻿import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common'
+import { z } from 'zod'
+import { CurrentUser } from '@/infra/auth/current-user-decorator'
+import { UserPayload } from '@/infra/auth/jwt.strategy'
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer'
+
+const editAnswerBodySchema = z.object({
+  content: z.string(),
+  attachments: z.array(z.string().uuid()).default([]),
+})
+
+const bodyValidationPipe = new ZodValidationPipe(editAnswerBodySchema)
+
+type EditAnswerBodySchema = z.infer<typeof editAnswerBodySchema>
+
+@Controller('/answers/:id')
+export class EditAnswerController {
+  constructor(private editAnswer: EditAnswerUseCase) {}
+
+  @Put()
+  @HttpCode(204)
+  async handle(
+    @Body(bodyValidationPipe) body: EditAnswerBodySchema,
+    @CurrentUser() user: UserPayload,
+    @Param('id') answerId: string,
+  ) {
+    const { content, attachments } = body
+    const { sub: userId } = user
+
+    const result = await this.editAnswer.execute({
+      answerId,
+      authorId: userId,
+      content,
+      attachmentsIds: attachments,
+    })
+
+    if (result.isLeft()) {
+      throw new BadRequestException()
+    }
+  }
+
+  private slugify(title: string) {
+    const slug = title
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '')
+
+    return slug
+  }
+}

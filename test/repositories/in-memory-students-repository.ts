@@ -1,6 +1,4 @@
-﻿import { DomainEvents } from '@/core/events/domain-events'
-import { PaginationParams } from '@/core/repositories/pagination-params'
-import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
+﻿import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { Student } from '@/domain/forum/enterprise/entities/Student'
 
 export class InMemoryStudentsRepository implements StudentsRepository {

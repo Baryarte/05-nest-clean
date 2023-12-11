@@ -30,16 +30,12 @@ describe('Get question by slug (E2E)', () => {
 
   test('[GET] /questions/:slug', async () => {
     const user = await studentFactory.makePrismaStudent()
-    console.log(user)
     const accessToken = jwt.sign({ sub: user.id.toString() })
-    console.log(accessToken)
 
     const question = await questionFactory.makePrismaQuestion({
       authorId: user.id,
       title: 'Question title 1',
     })
-
-    console.log(question)
 
     const response = await request(app.getHttpServer())
       .get(`/questions/question-title-1`)
