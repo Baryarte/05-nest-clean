@@ -1,4 +1,5 @@
-﻿import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
+﻿import { NotificationsRepository } from '@/domain/notification/application/repositories/notifications-repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Module } from '@nestjs/common'
 import { PrismaService } from './prisma/prisma.service'
 import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answer-attachments-repository'
@@ -16,6 +17,7 @@ import { QuestionAttachmentsRepository } from '@/domain/forum/application/reposi
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository'
 import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attachments-repository'
+import { PrsismaNotificationRepository } from './prisma/repositories/prisma-notification-repository'
 
 @Module({
   providers: [
@@ -50,6 +52,10 @@ import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attach
       provide: AttachmentsRepository,
       useClass: PrismaAttachmentsRepository,
     },
+    {
+      provide: NotificationsRepository,
+      useClass: PrsismaNotificationRepository,
+    },
   ],
   exports: [
     PrismaService,
@@ -61,6 +67,7 @@ import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attach
     QuestionAttachmentsRepository,
     QuestionCommentsRepository,
     AttachmentsRepository,
+    NotificationsRepository,
   ],
 })
 export class DatabaseModule {}

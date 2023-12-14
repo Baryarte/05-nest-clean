@@ -33,15 +33,4 @@ export class ChooseQuestionBestAnswerController {
       throw new BadRequestException()
     }
   }
-
-  private slugify(title: string) {
-    const slug = title
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)+/g, '')
-
-    return slug
-  }
 }

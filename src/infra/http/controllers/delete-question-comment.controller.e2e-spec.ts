@@ -7,7 +7,6 @@ import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
-import { AnswerFactory } from 'test/factories/make-answer'
 import { StudentFactory } from 'test/factories/make-student'
 
 describe('Delete question comment (E2E)', () => {

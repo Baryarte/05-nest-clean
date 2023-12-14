@@ -4,7 +4,6 @@
   Controller,
   HttpCode,
   Param,
-  Post,
   Put,
 } from '@nestjs/common'
 import { z } from 'zod'

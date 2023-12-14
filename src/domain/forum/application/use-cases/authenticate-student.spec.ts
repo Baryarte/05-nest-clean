@@ -1,11 +1,7 @@
 ﻿import { FakeEncrypter } from './../../../../../test/cryptography/fake-encrypter'
 import { FakeHasher } from './../../../../../test/cryptography/fake-hasher'
 import { InMemoryStudentsRepository } from '../../../../../test/repositories/in-memory-students-repository'
-import { RegisterStudentUseCase } from './register-student'
-import { Student } from '../../enterprise/entities/student'
-import { StudentAlreadyExistsError } from './errors/student-already-exists-error'
 import { AuthenticateStudentUseCase } from './authenticate-student'
-import exp from 'constants'
 import { makeStudent } from 'test/factories/make-student'
 
 let inMemoryStudentsRepository: InMemoryStudentsRepository

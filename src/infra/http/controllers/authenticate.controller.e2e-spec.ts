@@ -1,6 +1,5 @@
 ﻿import { AppModule } from '@/infra/app.module'
 import { DatabaseModule } from '@/infra/database/database.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import { hash } from 'bcryptjs'
@@ -23,7 +22,7 @@ describe('Authenticate (E2E)', () => {
   })
 
   test('[POST] /sessions', async () => {
-    const user = await studentFactory.makePrismaStudent({
+    await studentFactory.makePrismaStudent({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: await hash('123456', 8),

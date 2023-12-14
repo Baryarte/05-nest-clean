@@ -1,12 +1,8 @@
 ﻿import { faker } from '@faker-js/faker'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Answer, AnswerProps } from '@/domain/forum/enterprise/entities/answer'
-import { QuestionProps } from '@/domain/forum/enterprise/entities/question'
-import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question-mapper'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
-import { Question } from '@prisma/client'
-import { makeQuestion } from './make-question'
 import { PrismaAnswerMapper } from '@/infra/database/prisma/mappers/prisma-answer-mapper'
 
 export function makeAnswer(

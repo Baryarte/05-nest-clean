@@ -1,6 +1,5 @@
 ﻿import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
 import { Prisma, Comment as PrismaComment } from '@prisma/client'
 
 export class PrismaAnswerCommentMapper {

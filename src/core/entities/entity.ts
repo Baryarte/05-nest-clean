@@ -13,7 +13,7 @@ export class Entity<Props> {
     this._id = id ?? new UniqueEntityId()
   }
 
-  public equals(entity: Entity<Props>) {
+  public equals(entity: Entity<unknown>) {
     if (this === entity) {
       return true
     }

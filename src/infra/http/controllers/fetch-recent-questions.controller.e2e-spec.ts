@@ -34,7 +34,7 @@ describe('Fetch recent questions (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     for (let i = 3; i > 0; i--) {
-      const a = await questionFactory.makePrismaQuestion({
+      await questionFactory.makePrismaQuestion({
         authorId: user.id,
         title: `Question title ${i}`,
       })

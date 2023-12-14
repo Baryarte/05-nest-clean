@@ -1,4 +1,4 @@
-﻿import { Comment } from '@prisma/client'
+﻿import { Comment } from '@/domain/forum/enterprise/entities/comment'
 
 export class CommentPresenter {
   static toHTTP(comment: Comment<any>) {

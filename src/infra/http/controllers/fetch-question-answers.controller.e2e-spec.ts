@@ -43,7 +43,7 @@ describe('Fetch question answers (E2E)', () => {
     const questionId = question.id.toString()
 
     for (let i = 3; i > 0; i--) {
-      const answer = await answerFactory.makePrismaAnswer({
+      await answerFactory.makePrismaAnswer({
         questionId: question.id,
         authorId: user.id,
         content: `Answer content ${i}`,
