@@ -1,4 +1,4 @@
-﻿version: '3.8'
+﻿version: "3.8"
 
 services:
   postgres:
@@ -9,8 +9,15 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=nest-clean 
-      - PGDATA=/data/postgres # isso define onde os dados serão salvos dentro do container 
+      - POSTGRES_DB=nest-clean
+      - PGDATA=/data/postgres # isso define onde os dados serão salvos dentro do container
     volumes: # se o container for deletado, os dados não serão perdidos
       - ./data/pg:/data/postgres # ./data/pg é a pasta local e /data/postgres é a pasta dentro do container
-    
+
+  cache:
+    container_name: nest-clean-cache
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data
